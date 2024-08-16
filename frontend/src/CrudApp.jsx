@@ -15,7 +15,7 @@ function CrudApp() {
 
   const fetchItems = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/v1/tasks');
+      const res = await axios.get('https://proj-crud-mp-1.onrender.com/api/v1/tasks');
       if (res.data && res.data.tasks) {
         setItems(res.data.tasks);
       } else {
@@ -30,8 +30,10 @@ function CrudApp() {
 
   const addItem = async () => {
     try {
-      const res = await axios.post('http://localhost:5000/api/v1/tasks', { name, description });
-      setItems([...items, res.data]);
+      const res = await axios.post('https://proj-crud-mp-1.onrender.com/api/v1/tasks', { name, description });
+      // console.log(res.data);
+      
+      setItems([...items, res.data.task]);
       setName('');
       setDescription('');
     } catch (error) {
@@ -41,7 +43,7 @@ function CrudApp() {
 
   const deleteItem = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/v1/tasks/${id}`);
+      await axios.delete(`https://proj-crud-mp-1.onrender.com/api/v1/tasks/${id}`);
       setItems(items.filter((item) => item._id !== id));
     } catch (error) {
       console.error('Error deleting item:', error.response ? error.response.data : error.message);
@@ -56,7 +58,7 @@ function CrudApp() {
 
   const updateItem = async () => {
     try {
-      const res = await axios.patch(`http://localhost:5000/api/v1/tasks/${editingId}`, { 
+      const res = await axios.patch(`https://proj-crud-mp-1.onrender.com/api/v1/tasks/${editingId}`, { 
         name: editName, 
         description: editDescription 
       });
